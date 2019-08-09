@@ -54,7 +54,7 @@ CREATE TABLE `user` (
 /*Data for the table `user` */
 
 insert  into `user`(`id`,`username`,`password`,`avatar`,`created`,`updated`) values 
-(1,'zhang','111'','张三','2019-08-08','2019-08-08'),
+(1,'zhang','111','张三','2019-08-08','2019-08-08'),
 (2,'li','222','李四','2019-08-08','2019-08-08'),
 (3,'wang','333','王五','2019-08-08','2019-08-08');
 
