@@ -18,11 +18,21 @@
         <module>springtest-08-hikari-anno</module>
         <module>springtest-09-druid-mybatis-xml</module>
         <module>springtest-10-druid-mybatis-anno</module>
+        <module>springtest-11-SSM-druid-xml</module>
 
     </modules>
 
     <packaging>pom</packaging>
-
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
+        <!--<spring.version>5.1.2.RELEASE</spring.version>-->
+        <slf4j.version>1.6.6</slf4j.version>
+        <log4j.version>1.2.12</log4j.version>
+        <!--<mysql.version>5.1.6</mysql.version>-->
+        <!--<mybatis.version>3.4.5</mybatis.version>-->
+    </properties>
     <dependencyManagement>
         <dependencies>
             <dependency>
@@ -102,6 +112,51 @@
                 <artifactId>junit</artifactId>
                 <version>4.12</version>
             </dependency>
+
+
+            <dependency>
+                <groupId>javax.servlet.jsp</groupId>
+                <artifactId>jsp-api</artifactId>
+                <version>2.0</version>
+                <scope>provided</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>jstl</groupId>
+                <artifactId>jstl</artifactId>
+                <version>1.2</version>
+            </dependency>
+
+            <!-- log start -->
+            <dependency>
+                <groupId>log4j</groupId>
+                <artifactId>log4j</artifactId>
+                <version>${log4j.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.slf4j</groupId>
+                <artifactId>slf4j-api</artifactId>
+                <version>${slf4j.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.slf4j</groupId>
+                <artifactId>slf4j-log4j12</artifactId>
+                <version>${slf4j.version}</version>
+            </dependency>
+
+            <!-- log end -->
+
+            <!--pagehelper-->
+            <!-- https://mvnrepository.com/artifact/com.github.pagehelper/pagehelper -->
+            <dependency>
+                <groupId>com.github.pagehelper</groupId>
+                <artifactId>pagehelper</artifactId>
+                <version>5.1.8</version>
+            </dependency>
+
+
         </dependencies>
 
     </dependencyManagement>
