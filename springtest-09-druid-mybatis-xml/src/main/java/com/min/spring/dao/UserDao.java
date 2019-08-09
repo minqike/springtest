@@ -17,4 +17,6 @@ public interface UserDao {
 
    @Select("select * from User")
    List<User> findAll();
+
+   User findById(Integer id);
 }
