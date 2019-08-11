@@ -2,10 +2,8 @@ package com.min.spring.controller;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-import com.min.spring.dao.UserDao;
 import com.min.spring.entity.User;
 import com.min.spring.service.UserService;
-import com.sun.org.apache.regexp.internal.REUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -36,10 +34,12 @@ public class UserController {
 
     @RequestMapping("/user/page")
     @ResponseBody
-    public PageInfo<User> page( @RequestParam(value = "pagenum",defaultValue = "1")Integer pageNum,
+    public PageInfo<User> page( @RequestParam(value = "page",defaultValue = "1")Integer pageNum,
                             @RequestParam(value = "size",defaultValue = "2") Integer size) {
         PageHelper.startPage(pageNum, size);
+
         return new PageInfo(userService.findAll());
+
 
     }
 
