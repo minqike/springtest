@@ -19,6 +19,7 @@
         <module>springtest-09-druid-mybatis-xml</module>
         <module>springtest-10-druid-mybatis-anno</module>
         <module>springtest-11-SSM-druid-xml</module>
+        <module>springtest-12-SSM-thymeleaf-xml</module>
 
     </modules>
 
@@ -155,7 +156,12 @@
                 <artifactId>pagehelper</artifactId>
                 <version>5.1.8</version>
             </dependency>
-
+            <!--thymeleaf模板-->
+            <dependency>
+                <groupId>org.thymeleaf</groupId>
+                <artifactId>thymeleaf-spring5</artifactId>
+                <version>3.0.11.RELEASE</version>
+            </dependency>
 
         </dependencies>
 
