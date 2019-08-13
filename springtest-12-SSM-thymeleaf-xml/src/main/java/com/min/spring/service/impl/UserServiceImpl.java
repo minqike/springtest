@@ -4,9 +4,13 @@ import com.min.spring.dao.UserDao;
 import com.min.spring.dto.TokenUser;
 import com.min.spring.entity.User;
 import com.min.spring.service.UserService;
+import org.apache.commons.lang3.StringUtils;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -33,5 +37,34 @@ public class UserServiceImpl implements UserService {
     @Override
     public TokenUser findByToken(String token) {
         return userDao.findBytoken(token);
+    }
+
+    @Override
+    @Transactional
+    public User save(User user) {
+
+        if (user.getId()==null){
+            User newUser = new User();
+            BeanUtils.copyProperties(user,newUser);
+            newUser.setCreated(new Date());
+            newUser.setUpdated(newUser.getCreated());
+            userDao.save(newUser);
+            return  newUser;
+        }
+
+        else {
+            User user1 = userDao.findById(user.getId());
+            if (user1 == null) {
+                return null;
+            }
+
+            user1.setUsername(user.getUsername());
+            user1.setAvatar(user.getAvatar());
+            user1.setPassword(user.getPassword());
+            user1.setUpdated(new Date());
+            userDao.update(user1);
+            return user;
+
+        }
     }
 }

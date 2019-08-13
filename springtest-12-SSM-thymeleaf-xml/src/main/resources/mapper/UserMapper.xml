@@ -22,4 +22,34 @@
             on b.id = a.uid
         where a.token = #{token}
     </select>
+
+    <insert id="save" useGeneratedKeys="true" keyProperty="id" >
+        INSERT INTO user (
+          username,
+          password,
+          avatar,
+          created,
+          updated
+        )
+        VALUES
+          (
+            #{user.username},
+            #{user.password},
+            #{user.avatar},
+            #{user.created},
+            #{user.updated}
+          )
+    </insert>
+
+    <update id="update" >
+        UPDATE
+          user
+        SET
+          username = #{user.username},
+          password = #{user.password},
+          avatar = #{user.avatar},
+          updated = #{user.updated}
+        WHERE id = #{user.id};
+
+    </update>
 </mapper>

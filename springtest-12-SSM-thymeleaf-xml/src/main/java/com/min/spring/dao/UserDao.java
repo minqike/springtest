@@ -3,6 +3,7 @@ package com.min.spring.dao;
 import com.min.spring.dto.TokenUser;
 import com.min.spring.entity.User;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -24,4 +25,8 @@ public interface UserDao {
    User findByUsername(String username);
 
    TokenUser findBytoken(String token);
+
+    int save(@Param("user")User user);
+
+   int update(@Param("user")User user);
 }

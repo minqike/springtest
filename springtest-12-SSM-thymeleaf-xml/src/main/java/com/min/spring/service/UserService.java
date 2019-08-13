@@ -15,4 +15,6 @@ public interface UserService {
 
 
     TokenUser findByToken(String token);
+
+    User save(User user);
 }

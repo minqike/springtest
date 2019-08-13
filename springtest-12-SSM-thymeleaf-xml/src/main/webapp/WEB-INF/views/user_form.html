@@ -1,0 +1,196 @@
+﻿<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8"/>
+    <title>控制台</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <!-- basic styles -->
+    <link href="/static/assets/css/bootstrap.min.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="/static/assets/css/font-awesome.min.css"/>
+
+    <!--[if IE 7]>
+    <link rel="stylesheet" href="/static/assets/css/font-awesome-ie7.min.css"/>
+    <![endif]-->
+
+    <!-- page specific plugin styles -->
+
+    <!-- fonts -->
+
+    <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:400,300"/>
+
+    <!-- ace styles -->
+
+    <link rel="stylesheet" href="/static/assets/css/ace.min.css"/>
+    <link rel="stylesheet" href="/static/assets/css/ace-rtl.min.css"/>
+    <link rel="stylesheet" href="/static/assets/css/ace-skins.min.css"/>
+
+    <!--[if lte IE 8]>
+    <link rel="stylesheet" href="/static/assets/css/ace-ie.min.css"/>
+    <![endif]-->
+
+    <!-- inline styles related to this page -->
+
+    <!-- ace settings handler -->
+
+    <script src="/static/assets/js/ace-extra.min.js"></script>
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+
+    <!--[if lt IE 9]>
+    <script src="/static/assets/js/html5shiv.js"></script>
+    <script src="/static/assets/js/respond.min.js"></script>
+    <![endif]-->
+</head>
+
+<body>
+<div class="main-container" id="main-container">
+    <div class="">
+        <div>
+            <ul class="breadcrumb">
+                <li>
+                    <i class="icon-home home-icon"></i>
+                    <a href="#">首页</a>
+                </li>
+                <li class="active">用户管理</li>
+            </ul><!-- .breadcrumb -->
+        </div>
+
+        <div class="page-content">
+            <div class="page-header">
+                <h1 th:if="${pagetype eq '0' }">查看用户</h1>
+                <h1 th:if="${pagetype eq '1' }">编辑用户</h1>
+                <h1 th:if="${pagetype eq '2' }">添加用户</h1>
+            </div><!-- /.page-header -->
+            <div class="row">
+                <div class="col-xs-12">
+                    <!-- PAGE CONTENT BEGINS -->
+                    <div class="table-responsive">
+                        <a class="btn btn-sm btn-success" style="margin-bottom: 10px" href="/user/list">
+                            <i class="icon-reply"></i>
+                            返回
+                        </a>
+
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12">
+                    <!-- PAGE CONTENT BEGINS -->
+
+                    <form class="form-horizontal" role="form" action="/user/edit" method="post">
+
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label no-padding-right" for="id"> ID </label>
+                            <div class="col-sm-9">
+                                <input readonly="" type="text" class="col-xs-2 col-sm-2" id="id" name="id"
+                                       th:value="${user.id}"/>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label no-padding-right" for="username"> 用户名 </label>
+                            <div class="col-sm-9">
+                                <input type="text" id="username" name="username" placeholder="Username"
+                                       class="col-xs-10 col-sm-5" th:value="${user.username}"/>
+                            </div>
+                        </div>
+
+                        <div class="space-4"></div>
+
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label no-padding-right" name="password"
+                                   for="password">密码 </label>
+                            <div class="col-sm-9">
+                                <input type="password" id="password" name="password" placeholder="Password"
+                                       class="col-xs-10 col-sm-5" th:value="${user.password}"/>
+                            </div>
+                        </div>
+
+                        <div class="space-4"></div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label no-padding-right" for="avatar"> 头像 </label>
+                            <div class="col-sm-9">
+                                <input type="text" id="avatar" name="avatar" placeholder="avatar"
+                                       class="col-xs-10 col-sm-5" th:value="${user.avatar}"/>
+                            </div>
+                        </div>
+                        <div class="form-group has-error" th:switch="${message != null }">
+                            <div th:case="true" class="help-block inline " th:text="${message}"></div>
+                        </div>
+                        <div class="clearfix form-actions" th:if="${pagetype ne '0'}">
+                            <div class=" col-md-offset-3 col-md-9">
+                        <button class="btn btn-info" type="submit">
+                            <i class="icon-ok bigger-110"></i>
+                            提交
+                        </button>
+                        &nbsp; &nbsp; &nbsp;
+                        <button class="btn" type="reset">
+                            <i class="icon-undo bigger-110"></i>
+                            重置
+                        </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div><!-- /.main-container -->
+
+</div>
+<!-- basic scripts -->
+
+<!--[if !IE]> -->
+
+<script src="/static/assets/js/jquery-2.0.3.min.js"></script>
+
+<!-- <![endif]-->
+
+<!--[if IE]>
+<script src="/static/assets/js/jquery-1.10.2.min.js"></script>
+<![endif]-->
+
+<!--[if !IE]> -->
+
+<script type="text/javascript">
+    window.jQuery || document.write("<script src='static/assets/js/jquery-2.0.3.min.js'>" + "<" + "script>");
+</script>
+
+<!-- <![endif]-->
+
+<!--[if IE]>
+<script type="text/javascript">
+    window.jQuery || document.write("<script src='static/assets/js/jquery-1.10.2.min.js'>" + "<" + "script>");
+</script>
+<![endif]-->
+
+<script type="text/javascript">
+    if ("ontouchend" in document) document.write("<script src='static/assets/js/jquery.mobile.custom.min.js'>" + "<" + "script>");
+</script>
+<script src="/static/assets/js/bootstrap.min.js"></script>
+<script src="/static/assets/js/typeahead-bs2.min.js"></script>
+
+<!-- page specific plugin scripts -->
+
+<!--[if lte IE 8]>
+<script src="/static/assets/js/excanvas.min.js"></script>
+<![endif]-->
+
+<script src="/static/assets/js/jquery-ui-1.10.3.custom.min.js"></script>
+<script src="/static/assets/js/jquery.ui.touch-punch.min.js"></script>
+<script src="/static/assets/js/jquery.slimscroll.min.js"></script>
+<script src="/static/assets/js/jquery.easy-pie-chart.min.js"></script>
+<script src="/static/assets/js/jquery.sparkline.min.js"></script>
+<script src="/static/assets/js/flot/jquery.flot.min.js"></script>
+<script src="/static/assets/js/flot/jquery.flot.pie.min.js"></script>
+<script src="/static/assets/js/flot/jquery.flot.resize.min.js"></script>
+
+<!-- ace scripts -->
+
+<script src="/static/assets/js/ace-elements.min.js"></script>
+<script src="/static/assets/js/ace.min.js"></script>
+
+<!-- inline scripts related to this page -->
+
+</div>
+</body>
+</html>
+
