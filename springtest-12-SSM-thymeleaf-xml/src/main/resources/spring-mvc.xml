@@ -3,12 +3,15 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:context="http://www.springframework.org/schema/context"
        xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:aop="http://www.springframework.org/schema/aop"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
         http://www.springframework.org/schema/beans/spring-beans.xsd
         http://www.springframework.org/schema/context
         http://www.springframework.org/schema/context/spring-context.xsd
         http://www.springframework.org/schema/mvc
-        http://www.springframework.org/schema/mvc/spring-mvc.xsd">
+        http://www.springframework.org/schema/mvc/spring-mvc.xsd
+        http://www.springframework.org/schema/aop
+        https://www.springframework.org/schema/aop/spring-aop.xsd">
 
     <description>Spring MVC Configuration</description>
 
@@ -21,6 +24,7 @@
         <context:include-filter type="annotation"
                expression="org.springframework.stereotype.Controller"/>
     </context:component-scan>
+
 
     <!-- 必须放在<mvc:annotation-driven>之前 -->
     <bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter">
@@ -43,6 +47,8 @@
     <!-- 默认的注解映射的支持 -->
     <mvc:annotation-driven />
 
+    <aop:aspectj-autoproxy/>
+
     <!--themeleaf 模板引擎的导入-->
     <bean id="templateResolver"
           class="org.thymeleaf.spring5.templateresolver.SpringResourceTemplateResolver">
@@ -64,11 +70,7 @@
         <property name="characterEncoding" value="UTF-8"/>
     </bean>
 
-    <!--&lt;!&ndash; 定义视图文件解析 &ndash;&gt;-->
-    <!--<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">-->
-        <!--<property name="prefix" value="${web.view.prefix}"/>-->
-        <!--<property name="suffix" value="${web.view.suffix}"/>-->
-    <!--</bean>-->
+
 
     <mvc:interceptors>
         <mvc:interceptor>
