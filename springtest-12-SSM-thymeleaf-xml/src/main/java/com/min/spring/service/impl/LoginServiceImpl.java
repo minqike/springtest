@@ -1,19 +1,16 @@
 package com.min.spring.service.impl;
 
 import com.min.spring.constant.MyConstant;
-import com.min.spring.dto.TokenUser;
 import com.min.spring.entity.LoginUser;
 import com.min.spring.entity.User;
 import com.min.spring.service.LoginService;
 import com.min.spring.service.UserService;
 import com.min.spring.util.CookieUtil;
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.util.Date;
 
 @Service
 public class LoginServiceImpl implements LoginService {
@@ -51,16 +48,6 @@ public class LoginServiceImpl implements LoginService {
 
         return null;
 
-    }
-
-    @Override
-    public LoginUser findByToken(String token) {
-        TokenUser tokenUser = userService.findByToken(token);
-        LoginUser loginUser = new LoginUser();
-        if (tokenUser.getExpirationTime().after(new Date())){
-            BeanUtils.copyProperties(tokenUser,loginUser);
-        }
-        return loginUser;
     }
 
     @Override

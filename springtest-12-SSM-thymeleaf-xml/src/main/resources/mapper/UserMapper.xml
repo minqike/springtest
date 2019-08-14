@@ -10,19 +10,6 @@
         select * from User where username=#{username}
     </select>
 
-    <select id="findBytoken" resultType="com.min.spring.dto.TokenUser">
-        select
-          b.id,
-          b.username,
-          b.avatar,
-          a.expiration_time
-        from
-          usertoken a
-          inner join user b
-            on b.id = a.uid
-        where a.token = #{token}
-    </select>
-
     <insert id="save" useGeneratedKeys="true" keyProperty="id" >
         INSERT INTO user (
           username,

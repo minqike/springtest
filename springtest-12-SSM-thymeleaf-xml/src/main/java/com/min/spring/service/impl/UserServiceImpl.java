@@ -1,10 +1,8 @@
 package com.min.spring.service.impl;
 
 import com.min.spring.dao.UserDao;
-import com.min.spring.dto.TokenUser;
 import com.min.spring.entity.User;
 import com.min.spring.service.UserService;
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -32,11 +30,6 @@ public class UserServiceImpl implements UserService {
     @Override
     public User findByUsername(String username) {
         return userDao.findByUsername(username);
-    }
-
-    @Override
-    public TokenUser findByToken(String token) {
-        return userDao.findBytoken(token);
     }
 
     @Override
