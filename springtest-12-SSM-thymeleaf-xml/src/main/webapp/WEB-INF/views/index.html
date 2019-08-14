@@ -66,9 +66,10 @@
                 <li class="light-blue">
                     <a data-toggle="dropdown" href="#" class="dropdown-toggle">
                         <img class="nav-user-photo" src="static/assets/avatars/user.jpg" alt="Jason's Photo"/>
-                        <span class="user-info">
+                        <span class="user-info center">
 									<small>欢迎光临,</small>
-									Jason
+                                    <!--[[${session.loginuser.username}]]-->
+									<span th:text=" ${session.loginuser.username}">Jason</span>
 								</span>
 
                         <i class="icon-caret-down"></i>
@@ -92,7 +93,7 @@
                         <li class="divider"></li>
 
                         <li>
-                            <a href="#">
+                            <a href="/logout">
                                 <i class="icon-off"></i>
                                 退出
                             </a>
