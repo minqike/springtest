@@ -39,4 +39,16 @@
         WHERE id = #{user.id};
 
     </update>
+
+    <select id="findByString" resultType="com.min.spring.entity.User">
+        select * from User where username like concat("%",#{keyword},"%" )
+          or avatar like concat("%",#{keyword},"%" )
+    </select>
+    <delete id="deleteBatch" >
+        delete from user
+        where id in
+        <foreach collection="ids" open="(" close=")" separator="," item="id">
+            #{id}
+        </foreach>
+    </delete>
 </mapper>

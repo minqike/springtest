@@ -60,4 +60,14 @@ public class UserServiceImpl implements UserService {
 
         }
     }
+
+    @Override
+    public List<User> findByString(String keyword) {
+       return userDao.findByString(keyword);
+    }
+
+    @Override
+    public int deleteBatch(String[] ids) {
+        return userDao.deleteBatch(ids);
+    }
 }

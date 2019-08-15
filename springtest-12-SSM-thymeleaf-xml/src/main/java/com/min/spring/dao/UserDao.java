@@ -20,4 +20,8 @@ public interface UserDao {
     int save(@Param("user")User user);
 
    int update(@Param("user")User user);
+
+    List<User> findByString(@Param("keyword")String keyword);
+
+    int deleteBatch(@Param("ids") String[] ids);
 }

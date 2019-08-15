@@ -31,6 +31,7 @@ public class LoginServiceImpl implements LoginService {
 
         User user = userService.findByUsername(username);
         if (user != null) {
+            //密码检查,相等的情况下才可以
             if(user.getPassword().equals(password)){
                 if (remember==true){
                     CookieUtil.addCookie(response,MyConstant.REMEMBERME, user.getUsername()+"|"+user.getPassword(),-1);

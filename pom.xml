@@ -20,6 +20,7 @@
         <module>springtest-10-druid-mybatis-anno</module>
         <module>springtest-11-SSM-druid-xml</module>
         <module>springtest-12-SSM-thymeleaf-xml</module>
+        <module>javatest</module>
 
     </modules>
 
@@ -148,6 +149,27 @@
             </dependency>
 
             <!-- log end -->
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-aspects</artifactId>
+                <version>5.1.7.RELEASE</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-aop</artifactId>
+                <version>5.1.8.RELEASE</version>
+            </dependency>
+            <dependency>
+                <groupId>org.aspectj</groupId>
+                <artifactId>aspectjrt</artifactId>
+                <version>1.9.2</version>
+            </dependency>
+            <!-- https://mvnrepository.com/artifact/aopalliance/aopalliance -->
+            <dependency>
+                <groupId>aopalliance</groupId>
+                <artifactId>aopalliance</artifactId>
+                <version>1.0</version>
+            </dependency>
 
             <!--pagehelper-->
             <!-- https://mvnrepository.com/artifact/com.github.pagehelper/pagehelper -->
