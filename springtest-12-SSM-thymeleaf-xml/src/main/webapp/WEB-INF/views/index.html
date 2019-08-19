@@ -103,10 +103,28 @@
                                 添加用户
                             </a>
                         </li>
+                    </ul>
+                </li>
+
+                <li>
+                    <a href="#" class="dropdown-toggle" onclick="setActive(this)">
+                        <i class="icon-adjust"></i>
+                        <span class="menu-text"> 测试页面 </span>
+
+                        <b class="arrow icon-angle-down"></b>
+                    </a>
+
+                    <ul class="submenu" style="display: block">
+                        <li>
+                            <a href="/test/modal" target="mainFrame" onclick="setActive(this)">
+                                <i class="icon-double-angle-right"></i>
+                                自定义模态框测试
+                            </a>
+                        </li>
+
                     </ul><!-- /.nav-list -->
                     <!-- /.nav-list -->
                 </li>
-
 
             </ul>
 
@@ -148,17 +166,16 @@
 </body>
 <footer>
     <div th:replace="common/footer::footer_js"></div>
+
     <script>
+        // 菜单激活的箭头显示,完成了直接点击的效果,但是在右边页面直接跳转页面的时候,无法实现箭头自动跳转
         function setActive(e) {
             var sidebar = document.getElementById("sidebar");
             var tag_li = sidebar.getElementsByTagName("li");
             for (var i = 0; i < tag_li.length; i++) {
-
-                console.log(tag_li[i].getAttribute("class"));
                 tag_li[i].setAttribute("class", "");
             }
             var node = e.parentElement;
-            console.log(node);
             node.setAttribute("class", "active");
         }
 

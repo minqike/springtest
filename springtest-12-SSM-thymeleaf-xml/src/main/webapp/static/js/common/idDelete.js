@@ -20,18 +20,21 @@ jQuery(function ($) {
                 callback: function (result) {
                     if (result == true) {
                         $.ajax({
-                            "url": "/user/delete",
-                            "type": "POST",
-                            "data": {"id": id},
-                            "dataType": "JSON",
-                            "success": function (data) {
-                                if (data == "ok") {
-                                    bootbox.alert("删除成功", function () {
+                            url: "/user/delete",
+                            type: "POST",
+                            contentType: 'application/json',
+                            data: id,
+                            dataType: "json",
+                            success: function (data) {
+                                console.log(data);
+                                if (data.code == 200) {
+                                    bootbox.alert("删除成功.", function () {
                                             window.location.reload();
                                         }
                                     );
                                 } else {
-                                    bootbox.alert("删除失败", function () {
+
+                                    bootbox.alert("删除失败:"+data.message, function () {
                                         }
                                     );
                                 }

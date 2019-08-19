@@ -3,14 +3,20 @@ package com.min.spring.controller;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.min.spring.constant.MyConstant;
+import com.min.spring.dto.R;
 import com.min.spring.entity.User;
+import com.min.spring.exception.MyErrorCode;
+import com.min.spring.exception.MyException;
 import com.min.spring.service.UserService;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.log4j.spi.ErrorCode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
+import java.awt.*;
 import java.util.List;
 
 @Controller
@@ -96,30 +102,30 @@ public class UserController {
 
     @ResponseBody
     @RequestMapping(value = "/user/deleteBatch",method = RequestMethod.POST)
-    public String deleteBatch (@RequestParam String ids){
+    public R deleteBatch (@RequestBody String ids){
 
         if (StringUtils.isNotBlank(ids)){
             String[] idArray = ids.split(",");
             userService.deleteBatch(idArray);
-            return "ok";
+            return R.ok();
         }
 
-        return "false";
+        return R.error(new MyException(MyErrorCode.DELETE_FAIL));
 
     }
 
     @ResponseBody
     @RequestMapping(value = "/user/delete",method = RequestMethod.POST)
-    public String deleteById (@RequestParam String id){
+    public R deleteById (@RequestBody String id){
 
         if (StringUtils.isNotBlank(id)){
             String[] idArray = new String[1];
             idArray[0] = id;
             userService.deleteBatch(idArray);
-            return "ok";
+            return R.ok();
         }
 
-        return "false";
+        return R.error(new MyException(MyErrorCode.DELETE_FAIL));
 
     }
 

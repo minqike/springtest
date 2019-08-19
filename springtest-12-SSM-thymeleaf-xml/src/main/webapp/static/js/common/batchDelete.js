@@ -26,16 +26,18 @@ jQuery(function ($) {
                             $.ajax({
                                 "url": "/user/deleteBatch",
                                 "type": "POST",
-                                "data": {"ids": idArray.toString()},
+                                "data": JSON.stringify(idArray.toString()),
+                                "contentType": 'application/json',
                                 "dataType": "JSON",
                                 "success": function (data) {
-                                    if (data=="ok") {
-                                        bootbox.alert("删除成功", function () {
+                                    console.log(data);
+                                    if (data.code== 200) {
+                                        bootbox.alert("删除成功.", function () {
                                             window.location.reload();
                                             }
                                         );
                                     }else{
-                                        bootbox.alert("删除失败", function () {
+                                        bootbox.alert("删除失败:"+data.message, function () {
                                             }
                                         );
                                     }
