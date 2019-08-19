@@ -77,13 +77,13 @@
         <div class="sidebar" id="sidebar">
             <ul class="nav nav-list">
                 <li class="active">
-                    <a href="/index">
+                    <a href="/index" onclick="setActive(this)">
                         <i class="icon-dashboard"></i>
                         <span class="menu-text"> 首页 </span>
                     </a>
                 </li>
                 <li>
-                    <a href="#" class="dropdown-toggle">
+                    <a href="#" class="dropdown-toggle" onclick="setActive(this)">
                         <i class="icon-desktop"></i>
                         <span class="menu-text"> 用户管理 </span>
 
@@ -92,13 +92,13 @@
 
                     <ul class="submenu" style="display: block">
                         <li>
-                            <a href="/user/list" target="mainFrame">
+                            <a href="/user/list" target="mainFrame" onclick="setActive(this)">
                                 <i class="icon-double-angle-right"></i>
                                 用户列表
                             </a>
                         </li>
                         <li>
-                            <a href="/user/add" target="mainFrame">
+                            <a href="/user/add" target="mainFrame" onclick="setActive(this)">
                                 <i class="icon-double-angle-right"></i>
                                 添加用户
                             </a>
@@ -106,6 +106,8 @@
                     </ul><!-- /.nav-list -->
                     <!-- /.nav-list -->
                 </li>
+
+
             </ul>
 
             <div class="sidebar-collapse" id="sidebar-collapse">
@@ -146,6 +148,21 @@
 </body>
 <footer>
     <div th:replace="common/footer::footer_js"></div>
+    <script>
+        function setActive(e) {
+            var sidebar = document.getElementById("sidebar");
+            var tag_li = sidebar.getElementsByTagName("li");
+            for (var i = 0; i < tag_li.length; i++) {
+
+                console.log(tag_li[i].getAttribute("class"));
+                tag_li[i].setAttribute("class", "");
+            }
+            var node = e.parentElement;
+            console.log(node);
+            node.setAttribute("class", "active");
+        }
+
+    </script>
 </footer>
 </html>
 
