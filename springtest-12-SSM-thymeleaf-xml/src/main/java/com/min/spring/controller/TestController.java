@@ -10,4 +10,8 @@ public class TestController {
     public String modal(){
         return "/test/modal";
     }
+    @RequestMapping("test/upload")
+    public String fileupload(){
+        return "/test/upload";
+    }
 }
