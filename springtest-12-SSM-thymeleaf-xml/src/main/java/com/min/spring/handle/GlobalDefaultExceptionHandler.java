@@ -3,6 +3,7 @@ package com.min.spring.handle;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.min.spring.dto.R;
 import com.min.spring.exception.MyException;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.servlet.ModelAndView;
@@ -18,8 +19,16 @@ public class GlobalDefaultExceptionHandler {
     @ExceptionHandler(Exception.class)
     public Object handleException(HttpServletRequest request, HttpServletResponse response, Exception e) {
 
-        String contentType = request.getContentType();
-//        String contentType = response.getContentType();
+        String requestAccept = request.getHeader("accept");
+        String contentType = "text/html";
+        //判断请求类型
+        if (StringUtils.isNotEmpty(requestAccept)) {
+            if (StringUtils.contains(requestAccept, "application/json") || StringUtils.contains(requestAccept, "text/javascript")
+                    || StringUtils.contains(requestAccept, "text/json")) {
+                contentType = "application/json";
+            }
+        }
+
         if ("application/json".equals(contentType)) {
             R result;
             if (e instanceof MyException) {

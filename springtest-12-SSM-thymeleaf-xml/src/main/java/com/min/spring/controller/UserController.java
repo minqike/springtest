@@ -16,6 +16,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.awt.*;
 import java.util.List;
 
@@ -102,7 +103,7 @@ public class UserController {
 
     @ResponseBody
     @RequestMapping(value = "/user/deleteBatch",method = RequestMethod.POST)
-    public R deleteBatch (@RequestBody String ids){
+    public R deleteBatch (@RequestParam String ids){
 
         if (StringUtils.isNotBlank(ids)){
             String[] idArray = ids.split(",");
@@ -116,8 +117,9 @@ public class UserController {
 
     @ResponseBody
     @RequestMapping(value = "/user/delete",method = RequestMethod.POST)
-    public R deleteById (@RequestBody String id){
-
+    public R deleteById (@RequestParam String id,
+                         HttpServletResponse response){
+        System.out.println(response.getContentType());
         if (StringUtils.isNotBlank(id)){
             String[] idArray = new String[1];
             idArray[0] = id;

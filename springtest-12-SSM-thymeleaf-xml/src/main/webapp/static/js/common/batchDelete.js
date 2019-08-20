@@ -26,8 +26,10 @@ jQuery(function ($) {
                             $.ajax({
                                 "url": "/user/deleteBatch",
                                 "type": "POST",
-                                "data": JSON.stringify(idArray.toString()),
-                                "contentType": 'application/json',
+                                // "data": JSON.stringify(idArray.toString()),
+                                "data": {"ids":idArray.toString()},
+                                // "contentType": 'application/json',
+
                                 "dataType": "JSON",
                                 "success": function (data) {
                                     console.log(data);

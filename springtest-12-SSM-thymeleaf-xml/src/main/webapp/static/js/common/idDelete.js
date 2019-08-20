@@ -22,11 +22,10 @@ jQuery(function ($) {
                         $.ajax({
                             url: "/user/delete",
                             type: "POST",
-                            contentType: 'application/json',
-                            data: id,
+                            // contentType: 'application/json',
+                            data: {"id":id},
                             dataType: "json",
                             success: function (data) {
-                                console.log(data);
                                 if (data.code == 200) {
                                     bootbox.alert("删除成功.", function () {
                                             window.location.reload();
