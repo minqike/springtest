@@ -32,7 +32,6 @@ public class UploadController {
         Map<String, Object> map = new HashMap<>();
         //获取上传目录
         String path = request.getSession().getServletContext().getRealPath("/");
-        System.out.println(path);
 
         //目录不存在这创建
         File folder= new File(uploadFolder);

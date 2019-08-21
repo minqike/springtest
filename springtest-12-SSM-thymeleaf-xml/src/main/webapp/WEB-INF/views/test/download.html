@@ -1,0 +1,64 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<!--link下载-->
+<h1>link直接下载</h1>
+
+<a href="/upload/测试.csv" value="下载">文件下载</a>
+<br/>
+
+<!--按钮下载-->
+<h1>点击按钮下载</h1>
+<a href="/test/getDownload?filename=测试文件.txt">
+    a标签下载</a>
+
+<!--form提交-->
+<form action="/test/getDownload" method="get">
+    <input type="submit" value="input_submit" />需要在form中提交<br/>
+    <button type="submit" value="button_submit" >button_submit提交</button>需要在form中提交
+</form>
+
+<!--AJAX下载文件-->
+<br/>
+<h1>AJAX下载文件</h1>
+ajax下载时会动态创建一个form提交请求<br/><br/>
+下载时传送的参数<input type="text" id="searchString" value="">
+<button id="ajax_download" value="ajax下载" onclick="download()">下载</button>
+
+<br/><br/>
+</body>
+<script src='/static/assets/js/jquery-2.0.3.min.js'></script>
+
+
+<script>
+    function download() {
+        var searchString = $("#searchString").val();
+        $.ajax({
+            url: "/test/preDownload",
+            method: "post",
+            data: {
+                searchString: searchString
+            },
+            success: function (response, status, request) {
+                var disp = request.getResponseHeader('Content-Disposition');
+                if (response != "OK") {
+                    alert("检查失败");
+                    return;
+                }
+                var form = $('<form method="POST" action="/test/postDownload">');
+                var mySearchString = $('<input type="hidden" name="searchString"/>');
+                mySearchString.attr("value", searchString)
+                form.append(mySearchString);
+
+                $('body').append(form);
+                form.submit().remove();
+            }
+        })
+
+    }
+</script>
+</html>
