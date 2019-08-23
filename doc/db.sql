@@ -58,7 +58,31 @@ insert  into `user`(`id`,`username`,`password`,`avatar`,`created`,`updated`) val
 (2,'li','222','李四','2019-08-08','2019-08-08'),
 (3,'wang','333','王五','2019-08-08','2019-08-08');
 
-/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
-/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
-/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
-/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+CREATE TABLE `excel_import_file` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT COMMENT '自增id',
+  `import_date` varchar(8) DEFAULT '' COMMENT '导入日期YYYMMDD',
+  `import_file_name` varchar(50) DEFAULT '' COMMENT 'excel文件名',
+  `import_count` int(11) DEFAULT '0' COMMENT '导入件数',
+  `import_user` varchar(20) DEFAULT '' COMMENT '导入用户',
+  `status` int(2) DEFAULT '0' COMMENT '文件状态',
+  `import_type` varchar(10) DEFAULT '' COMMENT '导入用的技术',
+  `created` datetime DEFAULT NULL COMMENT '创建时间',
+  `updated` datetime DEFAULT NULL COMMENT '更新时间',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='导入excel文件记录表'
+
+CREATE TABLE `excel_import_data` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `file_id` int(11) DEFAULT NULL COMMENT '导入文件的id',
+  `file_name` varchar(50) DEFAULT NULL COMMENT '导入的文件名字',
+  `host_id` varchar(50) DEFAULT NULL COMMENT 'host名',
+  `message` varchar(255) DEFAULT NULL COMMENT '消息内容',
+  `start_time` datetime DEFAULT NULL COMMENT '开始时间',
+  `end_time` datetime DEFAULT NULL COMMENT '结束时间',
+  `status` int(2) DEFAULT '0' COMMENT '记录状态',
+  `import_type` varchar(10) DEFAULT '' COMMENT '导入用的技术',
+  `created` datetime DEFAULT NULL COMMENT '创建时间',
+  `updated` datetime DEFAULT NULL COMMENT '更新时间',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='导入excel数据表'
+
