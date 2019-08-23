@@ -1,0 +1,50 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<!--form上传文件-->
+<h1>excel上传,写入数据库,利用jxl包操作111</h1>
+<form action="/upload" method="post" enctype="multipart/form-data">
+    <input id="formfile" accept="application/vnd.ms-excel" type="file" name="file" multiple="multiple"/><br/>
+    <input type="submit" value="文件上传"/>
+</form>
+
+
+<!--AJAX上传文件-->
+<br/><br/><br/>
+<h1>AJAX上传文件</h1>
+<input id="file" type="file" name="file" ><br/>
+<br/><br/>
+<!--回显示图片-->
+<img  id="imageview" style="height: 500px;border: 1px solid blue;"/>
+
+</body>
+<script src='/static/assets/js/jquery-2.0.3.min.js'></script>
+
+
+<script>
+    $("#file").on('change',function() {
+        //注意这里不能写错。。。
+        var file=$(this)[0].files[0];
+        var formData = new FormData();
+        formData.append("file",file);
+
+        $.ajax({
+            url:"/upload",  //上传的url
+            data:formData,
+            dataType:"json",  //指定返回的格式为json
+            type:"post",
+            //这两个属性必须设置！！！！
+            contentType: false,
+            processData: false,
+            success:function (data) {
+                //回显图片
+                $("#imageview").attr("src",data.data);
+            }
+        })
+    })
+</script>
+</html>
