@@ -1,5 +1,6 @@
 package com.min.spring.controller.test;
 
+<<<<<<< HEAD
 import com.min.spring.entity.ExcelImportFile;
 import com.min.spring.service.ExcelImportFileService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +13,8 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
 import java.util.Map;
+
+import org.springframework.stereotype.Controller;
 
 @Controller
 public class ExcelImportController {
