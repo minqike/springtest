@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.min.spring.dao.ExcelImportFileDao">
+
+    <resultMap id="BaseResultMap" type="com.min.spring.entity.ExcelImportFile">
+		<id column="id" property="id" jdbcType="BIGINT"/>
+		<result column="import_date" property="importDate" jdbcType="VARCHAR"/>
+		<result column="import_file_name" property="importFileName" jdbcType="VARCHAR"/>
+		<result column="import_count" property="importCount" jdbcType="INTEGER"/>
+		<result column="import_user" property="importUser" jdbcType="VARCHAR"/>
+		<result column="status" property="status" jdbcType="INTEGER"/>
+		<result column="import_type" property="importType" jdbcType="VARCHAR"/>
+		<result column="created" property="created" jdbcType="TIMESTAMP"/>
+		<result column="updated" property="updated" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+    <insert id="insert" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO excel_import_file (
+          import_date,
+          import_file_name,
+          import_count,
+          import_user,
+          STATUS,
+          import_type,
+          created,
+          updated
+        )
+        VALUES
+          (
+            #{pojo.importDate},
+            #{pojo.importFileName},
+            #{pojo.importCount},
+            #{pojo.importUser},
+            #{pojo.status},
+            #{pojo.importType},
+            #{pojo.created},
+            #{pojo.updated}
+          );
+    </insert>
+    <insert id="batchInsert" parameterType="list" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO excel_import_file(id,import_date,import_file_name,import_count,import_user,status,import_type,created,updated)
+        VALUES
+        <foreach collection="list" item="item" index="index" separator=",">
+            (null,#{item.importDate},#{item.importFileName},#{item.importCount},#{item.importUser},#{item.status},#{item.importType},#{item.created},#{item.updated})
+        </foreach>
+    </insert>
+    <update id="update">
+        UPDATE excel_import_file
+        <trim prefix="SET" suffixOverrides=",">
+			<if test="importDate!=null">
+                import_date=#{importDate},
+            </if>
+			<if test="importFileName!=null">
+                import_file_name=#{importFileName},
+            </if>
+			<if test="importCount!=null">
+                import_count=#{importCount},
+            </if>
+			<if test="importUser!=null">
+                import_user=#{importUser},
+            </if>
+			<if test="status!=null">
+                status=#{status},
+            </if>
+			<if test="importType!=null">
+                import_type=#{importType},
+            </if>
+			<if test="created!=null">
+                created=#{created},
+            </if>
+			<if test="updated!=null">
+                updated=#{updated},
+            </if>
+        </trim>
+        WHERE id=#{id}
+    </update>
+
+    <sql id="SELECT_FIELD">
+        id,import_date,import_file_name,import_count,import_user,status,import_type,created,updated
+    </sql>
+
+    <sql id="QUERY_SQL">
+        from excel_import_file
+        <where>
+			<if test="id!=null and id!=-1">
+               AND id=#{id}
+            </if>
+			<if test="importDate!=null">
+               AND import_date=#{importDate}
+            </if>
+			<if test="importFileName!=null">
+               AND import_file_name=#{importFileName}
+            </if>
+			<if test="importCount!=null and importCount!=-1">
+               AND import_count=#{importCount}
+            </if>
+			<if test="importUser!=null">
+               AND import_user=#{importUser}
+            </if>
+			<if test="status!=null and status!=-1">
+               AND status=#{status}
+            </if>
+			<if test="importType!=null">
+               AND import_type=#{importType}
+            </if>
+			<if test="created!=null">
+               AND created=#{created}
+            </if>
+			<if test="updated!=null">
+               AND updated=#{updated}
+            </if>
+
+        </where>
+    </sql>
+
+    <select id="query" resultMap="BaseResultMap">
+        select <include refid="SELECT_FIELD"/>
+        <include refid="QUERY_SQL"/>
+        <if test="limit!=null and limit!=-1 ">
+            <if test="offset!=null and offset!=-1">
+                limit #{offset},#{limit}
+            </if>
+        </if>
+    </select>
+
+    <select id="count" resultType="long">
+        select count(*)
+        <include refid="QUERY_SQL"/>
+    </select>
+
+</mapper>

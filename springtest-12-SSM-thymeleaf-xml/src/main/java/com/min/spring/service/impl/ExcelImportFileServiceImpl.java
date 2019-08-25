@@ -8,7 +8,6 @@ import com.min.spring.service.ExcelImportFileService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
 import java.text.SimpleDateFormat;
@@ -21,32 +20,25 @@ public class ExcelImportFileServiceImpl implements ExcelImportFileService {
     ExcelImportFileDao excelImportFileDao;
 
 
-
-
-
     @Override
     @Transactional
-    public ExcelImportFile save(String importType, MultipartFile file, HttpServletRequest request) {
+    public ExcelImportFile save(String importType, String fileName,Integer count, HttpServletRequest request) {
         LoginUser loginUser = (LoginUser) request.getSession().getAttribute(MyConstant.LOGIN_USER);
 
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyyMMdd");//Date指定格式：yyyy-MM-dd HH:mm:ss:SSS
         String dateStr = simpleDateFormat.format(new Date());                         //format()方法将Date转换成指定格式的Strin
 
         ExcelImportFile excelImportFile = new ExcelImportFile();
-        excelImportFile.setImportFileName(file.getOriginalFilename());
+        excelImportFile.setImportFileName(fileName);
         excelImportFile.setImportDate(dateStr);
         excelImportFile.setImportType(importType);
         excelImportFile.setImportUser(loginUser.getUsername());
         excelImportFile.setStatus(0);
 
-        excelImportFile.setImportCount(2);
+        excelImportFile.setImportCount(count);
         excelImportFile.setCreated(new Date());
         excelImportFile.setUpdated(excelImportFile.getCreated());
-
-        ExcelImportFile importFile = excelImportFileDao.save(excelImportFile);
-
-
-
+        excelImportFileDao.insert(excelImportFile);
         return excelImportFile;
     }
 }

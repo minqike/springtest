@@ -18,7 +18,7 @@ public class SessionInterceptor implements HandlerInterceptor {
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-        System.out.println("SessionInterceptor执行");
+//        System.out.println("SessionInterceptor执行");
         //获取session中的用户
         Object loginuser = (LoginUser)request.getSession().getAttribute(MyConstant.LOGIN_USER);
         if (loginuser==null || ((LoginUser) loginuser).getId()==null){
