@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.min.spring.dao.ExcelImportFileDao">
+    <insert id="save" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO excel_import_file (
+          import_date,
+          import_file_name,
+          import_count,
+          import_user,
+          STATUS,
+          import_type,
+          created,
+          updated
+        )
+        VALUES
+          (
+            #{pojo.importDate},
+            #{pojo.importFileName},
+            #{pojo.importCount},
+            #{pojo.importUser},
+            #{pojo.status},
+            #{pojo.importType},
+            #{pojo.created},
+            #{pojo.updated}
+          );
+
+
+    </insert>
+</mapper>
