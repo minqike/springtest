@@ -20,7 +20,7 @@ public class DownloadController {
             @RequestParam(required = false) String searchString,
             HttpServletRequest request,
             HttpServletResponse response) {
-        return "NO";
+        return "OK";
     }
 
     @RequestMapping(value = "test/postDownload", method = RequestMethod.POST)

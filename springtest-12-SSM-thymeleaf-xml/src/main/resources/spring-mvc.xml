@@ -22,30 +22,65 @@
     <context:component-scan base-package="com.min.spring"
                             use-default-filters="false">
         <context:include-filter type="annotation"
-               expression="org.springframework.stereotype.Controller"/>
+                                expression="org.springframework.stereotype.Controller"/>
     </context:component-scan>
 
 
-    <!-- 必须放在<mvc:annotation-driven>之前 -->
-    <bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter">
-        <property name="messageConverters">
-            <list>
-                <bean class="org.springframework.http.converter.StringHttpMessageConverter">
-                    <property name="supportedMediaTypes">
-                        <list>
-                            <value>text/plain;charset=UTF-8</value>
-                            <value>text/html;charset=UTF-8</value>
-                            <value>applicaiton/javascript;charset=UTF-8</value>
-                        </list>
-                    </property>
-                </bean>
-                <bean class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter"/>
-            </list>
-        </property>
-    </bean>
+    <!--必须放在<mvc:annotation-driven>之前-->
+    <!--方法一 解决返回乱码和IE返回json时候变成下载文件-->
+    <!--<bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter">-->
+    <!--<property name="messageConverters">-->
+    <!--<list>-->
+    <!--&lt;!&ndash;解决乱码问题&ndash;&gt;-->
+    <!--<bean class="org.springframework.http.converter.StringHttpMessageConverter">-->
+    <!--<property name="supportedMediaTypes">-->
+    <!--<list>-->
+    <!--<value>text/plain;charset=UTF-8</value>-->
+    <!--<value>text/html;charset=UTF-8</value>-->
+    <!--<value>applicaiton/javascript;charset=UTF-8</value>-->
+    <!--</list>-->
+    <!--</property>-->
+    <!--</bean>-->
+    <!--&lt;!&ndash;解决IE返回json时候变成下载文件&ndash;&gt;-->
+    <!--<bean class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">-->
+    <!--<property name="supportedMediaTypes" value="text/plain;charset=UTF-8" />-->
+    <!--</bean>-->
+    <!--</list>-->
+    <!--</property>-->
+    <!--</bean>-->
 
     <!-- 默认的注解映射的支持 -->
-    <mvc:annotation-driven />
+    <mvc:annotation-driven ignore-default-model-on-redirect="true">
+        <!-- 设置不使用默认的消息转换器 -->
+        <mvc:message-converters register-defaults="false">
+            <!--<bean class="org.springframework.http.converter.xml.XmlAwareFormHttpMessageConverter"></bean>-->
+            <bean class="org.springframework.http.converter.ByteArrayHttpMessageConverter"/>
+            <bean class="org.springframework.http.converter.BufferedImageHttpMessageConverter"/>
+            <!-- 消息转换器，添加对文字编码的全局处理，解决中文返回问号的毛病 -->
+            <bean class="org.springframework.http.converter.StringHttpMessageConverter">
+                <!-- 加入支持的媒体类型：返回contentType -->
+                <property name="supportedMediaTypes">
+                    <list>
+                        <value>text/plain;charset=UTF-8</value>
+                        <value>text/html;charset=UTF-8</value>
+                        <value>application/javascript;charset=UTF-8</value>
+                    </list>
+                </property>
+            </bean>
+
+            <bean class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
+                <!-- 加入支持的媒体类型：返回contentType -->
+                <property name="supportedMediaTypes" >
+                    <list>
+                        <value>text/plain;charset=UTF-8</value>
+                        <value>text/html;charset=UTF-8</value>
+                        <value>application/json;charset=UTF-8</value>
+                    </list>
+                </property>
+            </bean>
+        </mvc:message-converters>
+    </mvc:annotation-driven>
+
 
     <aop:aspectj-autoproxy/>
 
