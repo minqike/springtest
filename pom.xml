@@ -197,6 +197,11 @@
                 <version>2.6.12</version>
             </dependency>
 
+            <dependency>
+                <groupId>cn.hutool</groupId>
+                <artifactId>hutool-all</artifactId>
+                <version>4.5.10</version>
+            </dependency>
 
         </dependencies>
 
