@@ -32,6 +32,7 @@ public class ExcelImportController {
 
         }
         map.put("count", files.length+"");
+        map.put("test", "我是中文,看看能不能正常显示");
         return map;
     }
 
