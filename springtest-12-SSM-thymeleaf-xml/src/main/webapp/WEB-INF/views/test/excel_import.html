@@ -9,11 +9,13 @@
 <h1>excel上传,写入数据库,利用jxl包操作111</h1>
 
 <form action="/test/import_jxl" method="post" enctype="multipart/form-data">
-    <input id="formfile" accept="application/vnd.ms-excel" type="file" name="files" multiple="multiple"/><br/>
+    <input id="formfile" accept="application/vnd.ms-excel" type="file" name="files" multiple="multiple"  onchange="fileSelectChange()"/><br/>
 
     <input type="submit" value="文件上传"/>
 </form>
-
+<div id="filelistdiv" style="display: none">
+    <ul id="filelistul"></ul>
+</div>
 
 <!--AJAX上传文件-->
 <br/><br/><br/>
@@ -47,6 +49,26 @@
                 $("#imageview").attr("src",data.data);
             }
         })
-    })
+    });
+    function fileSelectChange(){
+        $("#filelistul").html("");
+        var files=document.getElementById("formfile").files;
+        if (files != undefined) {
+            for (let i = 0; i < files.length; i++) {
+                if (files[i]) {
+                    var file = files[i];
+                    var filesize=0;
+                    if (file.size > 1024*1024){
+                        filesize = (Math.round(file.size*100/(1024*1024)/100)).toString()+'MB';
+                    } else{
+                        filesize = (Math.round(file.size*100/1024/100)).toString()+'KB';
+                        $("#filelistul").append("<li>文件名: "+ file.name +" ,文件大小: " +filesize + "</li>")
+                    }
+                }
+            }
+            $("#filelistdiv").show();
+        }
+
+    }
 </script>
 </html>
