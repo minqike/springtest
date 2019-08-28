@@ -1,7 +1,5 @@
 package com.min.spring.controller.test;
 
-import com.min.spring.entity.ExcelImportFile;
-import com.min.spring.service.ExcelImportFileService;
 import com.min.spring.service.ExcelImportService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -17,9 +15,6 @@ import java.util.Map;
 
 @Controller
 public class ExcelImportController {
-
-    @Autowired
-    private  ExcelImportFileService excelImportFileService;
 
     @Autowired
     private ExcelImportService excelImportService;

@@ -8,13 +8,13 @@ import com.min.spring.service.ExcelImportService;
 import jxl.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
-import java.text.SimpleDateFormat;
 import java.util.*;
 
-@Service
+@Service("excelImportService")
 public class ExcelImportServiceImpl implements ExcelImportService {
 
     @Autowired
@@ -24,6 +24,7 @@ public class ExcelImportServiceImpl implements ExcelImportService {
 
     //主要流程
     @Override
+    @Transactional
     public String importExcel(String importType, MultipartFile file, HttpServletRequest request) {
         String fileName = file.getOriginalFilename();
         List<ExcelImportDto> list = new ArrayList<>();
@@ -44,7 +45,8 @@ public class ExcelImportServiceImpl implements ExcelImportService {
         } catch (Exception e) {
             return "文件表保存失败";
         }
-
+//        excelImportFile = importFileService.save(importType, fileName, list.size(), request);
+        System.out.println("111111");
         //把excel数据写入到数据表
         int count = 0;
         try {
@@ -52,7 +54,8 @@ public class ExcelImportServiceImpl implements ExcelImportService {
         } catch (Exception e) {
             return "excel数据表保存失败";
         }
-
+//        count = importDataService.save(importType, fileName, excelImportFile.getId(), list);
+        System.out.println("22222");
         return "导入成功,数据条数:" + count + "件";
     }
 

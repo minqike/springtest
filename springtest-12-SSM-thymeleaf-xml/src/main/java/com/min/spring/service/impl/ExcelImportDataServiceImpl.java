@@ -6,6 +6,7 @@ import com.min.spring.entity.ExcelImportData;
 import com.min.spring.service.ExcelImportDataService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -16,6 +17,7 @@ public class ExcelImportDataServiceImpl implements ExcelImportDataService {
     ExcelImportDataDao excelImportDataDao;
 
     @Override
+    @Transactional
     public int save(String importType, String fileName, Integer id, List<ExcelImportDto> list) {
         List<ExcelImportData> importDataList = new ArrayList<>();
 
