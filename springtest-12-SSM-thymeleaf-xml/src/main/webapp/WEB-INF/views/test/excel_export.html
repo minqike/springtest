@@ -1,0 +1,42 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <!-- basic styles -->
+    <div th:replace="common/header::header"></div>
+</head>
+<body>
+<!--导出excel文件-->
+<h1>EasyPoi生成excel下载</h1>
+<div class="row" style="margin-left: 10px">
+
+    <a class="btn btn-sm btn-info" id="btn-export-default" href="/user/export">
+        <i class="glyphicon-export"></i>
+        导出用户列表
+    </a>
+</div>
+<br/>
+<div class="row" style="margin-left: 10px">
+    <a class="btn btn-sm btn-info" id="btn-export-use-template" href="/user/exportUseTemplate">
+        <i class="glyphicon-export"></i>
+        利用模板导出用户列表
+    </a>
+</div>
+
+<div>
+    <h2>流程</h2>
+    <pre>
+        1. 配置一个pojo,字段名需要用注解标识(User.java)
+        2. 需要有个方法可以得到一个pojo的list(UserService.findAll)
+        3. Controller层调用传入response到后面Service,
+        4. 调用方法写入Response( EasyPoiUtil.exportExcel(list, null, "用户信息", User.class, "用户信息", response);就可以获取下载用的对象)
+
+    </pre>
+</div>
+</body>
+<footer>
+    <div th:replace="common/footer::footer_js"></div>
+    <!--<div th:replace="common/footer::footer_text"></div>-->
+</footer>
+</html>

@@ -26,5 +26,9 @@ public class TestController {
         return "/test/excel_import";
     }
 
+    @RequestMapping("test/easypoiExportExcel")
+    public String easypoiExportExcel() {
+        return "/test/excel_export";
+    }
 
 }
