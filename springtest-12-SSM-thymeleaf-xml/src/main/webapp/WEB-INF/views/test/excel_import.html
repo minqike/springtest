@@ -7,58 +7,73 @@
 </head>
 <body>
 <!--form上传文件-->
-<h1>excel上传,写入数据库,利用jxl包操作111</h1>
-
+<h1>excel上传,写入数据库,利用jxl包操作</h1>
+<h2>Form上传文件</h2>
 <form action="/test/import_jxl" method="post" enctype="multipart/form-data">
-    <input id="formfile" accept="application/vnd.ms-excel" type="file" name="files" multiple="multiple"  onchange="fileSelectChange()"/><br/>
-
-    <input type="submit" value="文件上传"/>
+    <input id="formfile" accept="application/vnd.ms-excel" type="file" name="files" multiple="multiple"  onchange="fileFormSelectChange()"/>
+    <input type="submit" value="文件上传" style="margin: 10px"/>
 </form>
+<!--AJAX上传文件-->
+<br/>
+<h2>AJAX上传文件</h2>
+<form name="form2" id="form2">
+    <input id="ajaxfile" type="file" name="files" multiple="multiple" onchange="fileAjaxSelectChange()" />
+    <input type="button" id="ajaxUpload" value="文件上传" style="margin: 10px"/>
+</form>
+<br/><br/>
+<h3>文件列表</h3>
 <div id="filelistdiv" style="display: none">
     <ul id="filelistul"></ul>
 </div>
-
-<!--AJAX上传文件-->
-<br/><br/><br/>
-<h1>AJAX上传文件</h1>
-<input id="file" type="file" name="file" ><br/>
-<br/><br/>
-<!--回显示图片-->
-<img  id="imageview" style="height: 500px;border: 1px solid blue;"/>
-
+<h3>执行结果</h3>
+<div id="result_div" style="display: none">
+    <ul id="reslut_ul"></ul>
+</div>
 </body>
 <script src='/static/assets/js/jquery-2.0.3.min.js'></script>
 
 
 <script>
-    $("#file").on('change',function() {
-        //注意这里不能写错。。。
-        var file=$(this)[0].files[0];
-        var formData = new FormData();
-        formData.append("file",file);
+    $("#ajaxUpload").on('click',function() {
 
+        let form=document.getElementById("form2")[0];
+        let formData = new FormData(form);
         $.ajax({
-            url:"/upload",  //上传的url
+            url:"/test/import_jxl",  //上传的url
             data:formData,
             dataType:"json",  //指定返回的格式为json
             type:"post",
-            //这两个属性必须设置！！！！
-            contentType: false,
-            processData: false,
+            contentType: false, // 不要去设置Content-Type请求头
+            processData: false, // 不要去处理发送的数据
             success:function (data) {
-                //回显图片
-                $("#imageview").attr("src",data.data);
+                for (let i = 0; i < data.message.length; i++) {
+                    $("#reslut_ul").append("<li>"+ data.message[i] + "</li>")
+                }
+                $("#result_div").show();
             }
         })
     });
-    function fileSelectChange(){
+
+    function fileFormSelectChange(){
+        let files=document.getElementById("formfile").files;
+        document.getElementById("ajaxfile").value='';
+
+        setfilelist(files);
+    }
+
+    function fileAjaxSelectChange(){
+        let files=document.getElementById("ajaxfile").files;
+        document.getElementById("formfile").value='';
+        setfilelist(files);
+    }
+    function setfilelist(files) {
         $("#filelistul").html("");
-        var files=document.getElementById("formfile").files;
+        $("#reslut_ul").html("");
         if (files != undefined) {
             for (let i = 0; i < files.length; i++) {
                 if (files[i]) {
-                    var file = files[i];
-                    var filesize=0;
+                    let file = files[i];
+                    let filesize=0;
                     if (file.size > 1024*1024){
                         filesize = (Math.round(file.size*100/(1024*1024)/100)).toString()+'MB';
                     } else{
@@ -69,7 +84,6 @@
             }
             $("#filelistdiv").show();
         }
-
     }
 </script>
 </html>

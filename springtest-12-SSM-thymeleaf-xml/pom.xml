@@ -107,22 +107,8 @@
             <artifactId>jxl</artifactId>
             <version>2.6.12</version>
         </dependency>
-        <!--easypoi-->
-        <dependency>
-            <groupId>cn.afterturn</groupId>
-            <artifactId>easypoi-base</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>cn.afterturn</groupId>
-            <artifactId>easypoi-annotation</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>cn.afterturn</groupId>
-            <artifactId>easypoi-web</artifactId>
-        </dependency>
+
         <!-- log end -->
-
-
     </dependencies>
 
 </project>

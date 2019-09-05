@@ -41,7 +41,7 @@ public class GlobalDefaultExceptionHandler {
                 response.setStatus(200);
                 response.setCharacterEncoding("utf-8");
                 PrintWriter writer = response.getWriter();
-                writer.write( new ObjectMapper().writeValueAsString(result));
+                writer.write(new ObjectMapper().writeValueAsString(result));
                 writer.close();
             } catch (IOException ioe) {
             }
@@ -51,11 +51,22 @@ public class GlobalDefaultExceptionHandler {
             ModelAndView modelAndView = new ModelAndView();
             modelAndView.addObject("msg", e.getMessage());
             modelAndView.addObject("url", request.getRequestURL());
-            modelAndView.addObject("stackTrace", e.getStackTrace());
+            modelAndView.addObject("stackTrace", getStackMsg(e));
             modelAndView.setViewName("error");
             return modelAndView;
         }
 
     }
 
+
+    private static String getStackMsg(Exception e) {
+
+        StringBuffer sb = new StringBuffer();
+        StackTraceElement[] stackArray = e.getStackTrace();
+        for (int i = 0; i < stackArray.length; i++) {
+            StackTraceElement element = stackArray[i];
+            sb.append(element.toString() + "\n");
+        }
+        return sb.toString();
+    }
 }
