@@ -32,6 +32,7 @@
         <!--<spring.version>5.1.2.RELEASE</spring.version>-->
         <slf4j.version>1.6.6</slf4j.version>
         <log4j.version>1.2.12</log4j.version>
+        <oshi.version>3.9.1</oshi.version>
         <!--<mysql.version>5.1.6</mysql.version>-->
         <!--<mybatis.version>3.4.5</mybatis.version>-->
     </properties>
@@ -222,6 +223,12 @@
                 <groupId>cn.afterturn</groupId>
                 <artifactId>easypoi-web</artifactId>
                 <version>4.0.0</version>
+            </dependency>
+            <!-- 获取系统信息 -->
+            <dependency>
+                <groupId>com.github.oshi</groupId>
+                <artifactId>oshi-core</artifactId>
+                <version>${oshi.version}</version>
             </dependency>
         </dependencies>
 

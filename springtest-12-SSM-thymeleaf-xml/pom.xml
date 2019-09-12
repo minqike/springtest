@@ -121,7 +121,10 @@
             <groupId>cn.afterturn</groupId>
             <artifactId>easypoi-web</artifactId>
         </dependency>
-
+        <dependency>
+            <groupId>com.github.oshi</groupId>
+            <artifactId>oshi-core</artifactId>
+        </dependency>
         <!-- log end -->
     </dependencies>
 
